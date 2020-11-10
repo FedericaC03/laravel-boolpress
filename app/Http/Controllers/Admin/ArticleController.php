@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use  App\Http\Controllers\Controller;
 use App\article;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 class ArticleController extends Controller
 {
     /**
@@ -29,7 +31,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.articles.create");
     }
 
     /**
@@ -40,7 +42,24 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $request->validate([
+            "title"=> "required|max:50",
+            "content"=> "required",    
+            "image"=>"image"   
+        ]);
+
+        $path = Storage::disk('public')->put('images', $data['image']);
+        $newArticle = new Article;
+        $newArticle->user_id = Auth::id();
+        $newArticle->title = $data["title"];
+        $newArticle->content = $data["content"];
+        $newArticle->image = $path;
+
+        $newArticle->save();
+
+        return redirect()->route("admin.articles.show", $newArticle->id);
     }
 
     /**
