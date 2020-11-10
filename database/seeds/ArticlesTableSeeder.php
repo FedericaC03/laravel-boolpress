@@ -16,11 +16,11 @@ class ArticlesTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
 
-            $users = User::all();
+            $user = User::inRandomOrder()->first();
 
-            foreach ($users as $user) {
+            
                 $newArticle = Article::where("user_id", $user->id)->get();
                 $newArticle = New Article;
                 $newArticle->user_id = $user->id;
@@ -28,7 +28,7 @@ class ArticlesTableSeeder extends Seeder
                 $newArticle->content = $faker->sentences(6, true);
                 $newArticle->save();
 
-        }
+        
     }
   }
 }

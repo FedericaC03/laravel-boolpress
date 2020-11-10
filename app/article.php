@@ -10,4 +10,5 @@ class article extends Model
     {
         return $this->belongsTo('App\User');
     }
+    protected $table = 'articles';
 }

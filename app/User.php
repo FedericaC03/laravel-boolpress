@@ -40,5 +40,5 @@ class User extends Authenticatable
     public function articles(){
         return $this->hasMany('App\Articles');
 }
-
+    // protected $table = 'users';
 }
