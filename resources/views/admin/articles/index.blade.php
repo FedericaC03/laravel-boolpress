@@ -22,7 +22,7 @@
                 <td>{{$article->content}}</td>
                 <td>{{$article->user->name}}</td>
                 <td>
-                    <a href="{{route('articles.show', $article->id)}}">View</a>
+                    <a href="{{route('admin.articles.show', $article->id)}}">View</a>
                     edit 
                     delete
                 </td>

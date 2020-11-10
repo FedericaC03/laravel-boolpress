@@ -20,7 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function() {
+Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware('auth')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('articles', 'ArticleController'); 
 });
+
+// articles for the guests
+Route::get('articles', 'ArticleController@index')->name('articles.index');
+Route::get('articles/{id}', 'ArticleController@show')->name('articles.show');
