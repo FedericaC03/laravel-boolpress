@@ -11,8 +11,8 @@
             </ul>
         </div>
     @endif
-        <h1>Crea il tuo post</h1>
-    <form action="{{route('admin.articles.store', $article->id)}}" method="POST" enctype="multipart/form-data">
+    <h1>Modifica post</h1>
+    <form action="{{route('admin.articles.update', $article)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method("PUT")
             <div class="form-group">
@@ -29,7 +29,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Salva</button>
         </form>
-
+ 
     </div>
 
 @endsection

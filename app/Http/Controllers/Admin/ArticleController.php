@@ -88,7 +88,7 @@ class ArticleController extends Controller
     {
         $article = Article::where("id", $id)->first();
 
-        return view('admin.articles.show', compact('article'));
+        return view('admin.articles.edit', compact('article'));
     }
 
     /**
@@ -98,7 +98,7 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $article)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
 
@@ -109,9 +109,10 @@ class ArticleController extends Controller
         ]);
 
        
+        $article = Article::find($id); 
+    
         $article->update($data);
-
-        return redirect()->route("admin.articles.show", $article->id);
+        return redirect()->route('admin.articles.show', $article);
     }
 
     /**
@@ -124,7 +125,7 @@ class ArticleController extends Controller
     {
         $article = article::find($id);
         $article->delete();
-        return redirect()->route("admin.articles.index");
+        return redirect()->route("admin.articles.index")->withSuccess(["Post deleted successfully"]);
 
     }
 }

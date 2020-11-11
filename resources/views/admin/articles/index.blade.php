@@ -27,7 +27,9 @@
                         <a href="{{route('admin.articles.show', $article->id)}}">View</a>
                     </button>
                     
-                    <button type="button" class="btn btn-success">Edit</button>
+                    <button type="button" class="btn btn-success">    
+                        <a href="{{route('admin.articles.edit', $article->id)}}">Edit</a>
+                    </button>
                      
                     <form action="{{route("admin.articles.destroy", $article->id)}}" method="POST">
                         @csrf
@@ -40,6 +42,18 @@
             </tbody>
           </table>
        
-
+          @if (session()->has('success'))
+          <div class="alert alert-success">
+              @if(is_array(session('success')))
+                  <ul>
+                      @foreach (session('success') as $message)
+                          <li>{{ $message }}</li>
+                      @endforeach
+                  </ul>
+              @else
+                  {{ session('success') }}
+              @endif
+          </div>
+          @endif
     </div>
 @endsection
