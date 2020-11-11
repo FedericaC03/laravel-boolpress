@@ -86,7 +86,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::where("id", $id)->first();
+
+        return view('admin.articles.show', compact('article'));
     }
 
     /**
@@ -96,9 +98,20 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $article)
     {
-        //
+        $data = $request->all();
+
+        $request->validate([
+            "title"=> "required|max:50",
+            "content"=> "required",    
+            "image"=>"image"   
+        ]);
+
+       
+        $article->update($data);
+
+        return redirect()->route("admin.articles.show", $article->id);
     }
 
     /**
@@ -109,6 +122,9 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = article::find($id);
+        $article->delete();
+        return redirect()->route("admin.articles.index");
+
     }
 }
