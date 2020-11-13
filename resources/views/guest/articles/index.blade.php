@@ -56,10 +56,19 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Our Posts</h1>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Register</a>
-            <a href="#" class="btn btn-secondary my-2">Login</a>
-          </p>
+          @if (Route::has('login'))
+          <div class="top-right links">
+              @auth
+                  <a class="btn btn-primary my-2" href="{{ url('/articles') }}">Home</a>
+              @else
+                  <a  class="btn btn-primary my-2" href="{{ route('login') }}">Login</a>
+
+                  @if (Route::has('register'))
+                      <a class="btn btn-secondary my-2" href="{{ route('register') }}">Register</a>
+                  @endif
+              @endauth
+          </div>
+      @endif
         </div>
       </section>
 
@@ -68,11 +77,10 @@
 
           <div class="row">
               @foreach ($articles as $article)
-                  
               <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                  <img class="card-img-top" src="" alt="Card image cap">
-                  <div class="card-body">
+                  <img class="card-img-top" src="{{ asset('storage/'.$article->image) }}" alt="Card image cap">
+                  <div class="card-body ">
                     <h3>{{$article->title}}</h3>
                     <p class="card-text">{{$article->content}}</p>
                     <div class="d-flex justify-content-between align-items-center">

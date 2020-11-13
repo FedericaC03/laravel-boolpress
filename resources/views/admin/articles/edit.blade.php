@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="content">Contenuto</label>
-                <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Inserisci il contenuto" value="{{$article->content}}"></textarea>
+                <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Inserisci il contenuto" value="">{{$article->content}}</textarea>
             </div>
             <div class="form-group">
                 <label for="image">Immagine</label>
